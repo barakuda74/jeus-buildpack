@@ -1,0 +1,3 @@
+---
+version: 7.+
+repository_root: ! '{default.repository.root}/jeus'

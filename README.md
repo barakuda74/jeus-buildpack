@@ -1,16 +1,18 @@
-# Cloud Foundry Java Buildpack
+# Cloud Foundry JEUS Buildpack
 [![Build Status](https://travis-ci.org/cloudfoundry/java-buildpack.svg?branch=master)](https://travis-ci.org/cloudfoundry/java-buildpack)
 [![Dependency Status](https://gemnasium.com/cloudfoundry/java-buildpack.svg)](https://gemnasium.com/cloudfoundry/java-buildpack)
 [![Code Climate](https://codeclimate.com/repos/5224adaec7f3a3415107004c/badges/bc49f7d7f8dfc47057c8/gpa.svg)](https://codeclimate.com/repos/5224adaec7f3a3415107004c/feed)
 [![Code Climate](https://codeclimate.com/repos/5224adaec7f3a3415107004c/badges/bc49f7d7f8dfc47057c8/coverage.svg)](https://codeclimate.com/repos/5224adaec7f3a3415107004c/feed)
 
-The `java-buildpack` is a [Cloud Foundry][] buildpack for running JVM-based applications.  It is designed to run many JVM-based applications ([Grails][], [Groovy][], Java Main, [Play Framework][], [Spring Boot][], and Servlet) with no additional configuration, but supports configuration of the standard components, and extension to add custom components.
+The `jeus-buildpack` is a [Cloud Foundry][] buildpack for running JVM-based applications.  It is designed to run many JVM-based applications ([Grails][], [Groovy][], Java Main, [Play Framework][], [Spring Boot][], and Servlet) with no additional configuration, but supports configuration of the standard components, and extension to add custom components.
+
+This buildpack has been customised to use JEUS. The standard Java Buildpack currently uses Tomcat.
 
 ## Usage
 To use this buildpack specify the URI of the repository when pushing an application to Cloud Foundry:
 
 ```bash
-$ cf push <APP-NAME> -p <ARTIFACT> -b https://github.com/cloudfoundry/java-buildpack.git
+$ cf push <APP-NAME> -p <ARTIFACT> -b https://github.com/cloudfoundry/jeus-buildpack.git
 ```
 
 ## Examples
@@ -70,6 +72,7 @@ To learn how to configure various properties of the buildpack, follow the "Confi
 	* [Dist ZIP](docs/container-dist_zip.md)
 	* [Groovy](docs/container-groovy.md) ([Configuration](docs/container-groovy.md#configuration))
 	* [Java Main](docs/container-java_main.md) ([Configuration](docs/container-java_main.md#configuration))
+	* [JEUS](docs/container-jeus.md) ([Configuration](docs/container-jeus.md#configuration))
 	* [Play Framework](docs/container-play_framework.md)
 	* [Ratpack](docs/container-ratpack.md)
 	* [Spring Boot](docs/container-spring_boot.md)
@@ -120,7 +123,7 @@ The online package is a version of the buildpack that is as minimal as possible 
 $ bundle install
 $ bundle exec rake package
 ...
-Creating build/java-buildpack-cfd6b17.zip
+Creating build/jeus-buildpack-cfd6b17.zip
 ```
 
 ### Offline Package
@@ -132,7 +135,7 @@ To pin the version of dependencies used by the buildpack to the ones currently r
 $ bundle install
 $ bundle exec rake package OFFLINE=true PINNED=true
 ...
-Creating build/java-buildpack-offline-cfd6b17.zip
+Creating build/jeus-buildpack-offline-cfd6b17.zip
 ```
 
 ### Package Versioning
@@ -142,7 +145,7 @@ Keeping track of different versions of the buildpack can be difficult.  To help 
 $ bundle install
 $ bundle exec rake package VERSION=2.1
 ...
-Creating build/java-buildpack-2.1.zip
+Creating build/jeus-buildpack-2.1.zip
 ```
 
 ## Running Tests
