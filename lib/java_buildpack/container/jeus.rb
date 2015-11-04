@@ -55,6 +55,15 @@ module JavaBuildpack
 
       private
 
+      def copy_application
+        FileUtils.mkdir_p root
+        @application.root.children.each { |child| FileUtils.cp_r child, root }
+      end
+
+      def create_dodeploy
+        FileUtils.touch(webapps + 'ROOT.war.dodeploy')
+      end
+
       def web_inf?
         (@application.root + 'WEB-INF').exist?
       end
