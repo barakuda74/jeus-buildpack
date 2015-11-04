@@ -37,12 +37,12 @@ module JavaBuildpack
         [
           @droplet.java_home.as_env_var,
           @droplet.java_opts.as_env_var,
-          "$PWD/#{(@droplet.sandbox + 'bin/startDomainAdminServer.sh').relative_path_from(@droplet.root)}",
+          "$PWD/#{(@droplet.sandbox + 'bin/startDomainAdminServer').relative_path_from(@droplet.root)}",
           '-u',
           'administrator',
           '-p',
           'jeus'
-        ].flatten.compact.join(' ')
+        ].compact.join(' ')
       end
 
       protected
