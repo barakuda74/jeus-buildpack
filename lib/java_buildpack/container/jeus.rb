@@ -27,6 +27,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
+        download_tar
 
       end
 
@@ -50,6 +51,17 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#detect)
       def supports?
         web_inf? && !JavaBuildpack::Util::JavaMainUtils.main_class(@application)
+      end
+
+      private
+
+      def copy_application
+        FileUtils.mkdir_p root
+        @application.root.children.each { |child| FileUtils.cp_r child, root }
+      end
+
+      def create_dodeploy
+        FileUtils.touch(webapps + 'ROOT.war.dodeploy')
       end
 
       def web_inf?

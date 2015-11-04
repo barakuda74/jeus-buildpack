@@ -23,7 +23,7 @@ require 'java_buildpack/util/space_case'
 require 'java_buildpack/util/sanitizer'
 
 module JavaBuildpack
-  module Component
+  module CompoFnent
 
     # A convenience base class for all components in the buildpack.  This base class ensures that the contents of the
     # +context+ are assigned to instance variables matching their keys.  It also ensures that all contract methods are
