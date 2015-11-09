@@ -20,8 +20,8 @@
 # e.g.  repository_root: "http://example.com/oracle-jre/{platform}/{architecture}"
 ---
 jre:
-  version: 1.8.0_+
-  repository_root: ""
+  version: 1.7.0_+
+  repository_root: ! 'http://yiiok.ddns.net:8080/openpaas/oraclejre'
 memory_calculator:
   version: 2.+
   repository_root: ! '{default.repository.root}/memory-calculator/{platform}/{architecture}'
