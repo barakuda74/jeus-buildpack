@@ -28,7 +28,7 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
         download_tar
-#        copy_application          # jboss debug
+        copy_application
 #        create_dodeploy           # jboss debug
       end
 

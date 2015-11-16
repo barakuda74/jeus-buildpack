@@ -18,74 +18,74 @@ require 'spec_helper'
 require 'component_helper'
 require 'java_buildpack/container/jeus'
 
-describe JavaBuildpack::Container::Tomcat do
+describe JavaBuildpack::Container::JEUS do
   include_context 'component_helper'
 
   it 'detects WEB-INF',
      app_fixture: 'container_tomcat' do
 
-  expect(component.detect).to include("jeus=#{version}")
-end
+    expect(component.detect).to include("jeus=#{version}")
+  end
 
-it 'does not detect when WEB-INF is absent',
-   app_fixture: 'container_main' do
+  it 'does not detect when WEB-INF is absent',
+     app_fixture: 'container_main' do
 
-expect(component.detect).to be_nil
-end
+    expect(component.detect).to be_nil
+  end
 
-it 'extracts JBoss from a GZipped TAR',
-   app_fixture:   'container_tomcat',
-  cache_fixture: 'stub-jboss.tar.gz' do
+  it 'extracts JEUS from a GZipped TAR',
+     app_fixture:   'container_tomcat',
+    cache_fixture: 'stub-jboss.tar.gz' do     #jboss debug
 
-component.compile
+    component.compile
 
-expect(sandbox + 'bin/startDomainAdminServer').to exist
-end
+    expect(sandbox + 'bin/startDomainAdminServer').to exist
+  end
 
-it 'manipulates the standalone configuration',
-   app_fixture:   'container_tomcat',
-  cache_fixture: 'stub-jboss.tar.gz' do
+  it 'manipulates the standalone configuration',
+     app_fixture:   'container_tomcat',
+    cache_fixture: 'stub-jboss.tar.gz' do     #jboss debug
 
-component.compile
+    component.compile
 
-configuration = sandbox + 'standalone/configuration/standalone.xml'
-expect(configuration).to exist
+    configuration = sandbox + 'standalone/configuration/standalone.xml'
+    expect(configuration).to exist
 
-contents = configuration.read
-expect(contents).to include('<socket-binding name="http" port="${http.port}"/>')
-expect(contents).to include('<virtual-server name="default-host" enable-welcome-root="false">')
-end
+    contents = configuration.read
+    expect(contents).to include('<socket-binding name="http" port="${http.port}"/>')
+    expect(contents).to include('<virtual-server name="default-host" enable-welcome-root="false">')
+  end
 
-it 'creates a "ROOT.war.dodeploy" in the deployments directory',
-   app_fixture:   'container_tomcat',
-  cache_fixture: 'stub-jboss.tar.gz' do
+  it 'creates a "ROOT.war.dodeploy" in the deployments directory',
+     app_fixture:   'container_tomcat',
+    cache_fixture: 'stub-jboss.tar.gz' do     #jboss debug
 
-component.compile
+    component.compile
 
-expect(sandbox + 'standalone/deployments/ROOT.war.dodeploy').to exist
-end
+    expect(sandbox + 'standalone/deployments/ROOT.war.dodeploy').to exist
+  end
 
-it 'copies only the application files and directories to the ROOT webapp',
-   app_fixture:   'container_tomcat',
-  cache_fixture: 'stub-jboss.tar.gz' do
+  it 'copies only the application files and directories to the ROOT webapp',
+     app_fixture:   'container_tomcat',
+    cache_fixture: 'stub-jboss.tar.gz' do     #jboss debug
 
-FileUtils.touch(app_dir + '.test-file')
+    FileUtils.touch(app_dir + '.test-file')
 
-component.compile
+    component.compile
 
-root_webapp = app_dir + '.java-buildpack/jboss/standalone/deployments/ROOT.war'
+    root_webapp = app_dir + '.java-buildpack/jboss/standalone/deployments/ROOT.war'     #jboss debug
 
-web_inf = root_webapp + 'WEB-INF'
-expect(web_inf).to exist
+    web_inf = root_webapp + 'WEB-INF'
+    expect(web_inf).to exist
 
-expect(root_webapp + '.test-file').not_to exist
-end
+    expect(root_webapp + '.test-file').not_to exist
+  end
 
-it 'returns command',
-   app_fixture: 'container_tomcat' do
+  it 'returns command',
+     app_fixture: 'container_tomcat' do
 
-expect(component.release).to eq("#{java_home.as_env_var} JAVA_OPTS=\"test-opt-2 test-opt-1 -Dhttp.port=$PORT\" " \
-                                      '$PWD/.java-buildpack/jeus/bin/startDomainAdminServer -u administrator -p jeus')
-end
+    expect(component.release).to eq("#{java_home.as_env_var} JAVA_OPTS=\"test-opt-2 test-opt-1 -Dhttp.port=$PORT\" " \
+                                        '$PWD/.java-buildpack/jeus/bin/startDomainAdminServer -u administrator -p jeus')
+  end
 
 end
