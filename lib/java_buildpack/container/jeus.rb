@@ -55,12 +55,15 @@ module JavaBuildpack
       private
 
       def copy_application
-        FileUtils.mkdir_p root
         @application.root.children.each { |child| FileUtils.cp_r child, root }
       end
 
       def create_dodeploy
         FileUtils.touch(webapps + 'ROOT.war.dodeploy')
+      end
+
+      def root
+        @droplet.sandbox + 'webhome/autodeploy'
       end
 
       def web_inf?
