@@ -1,4 +1,4 @@
 ---
-version: 7.+
+version: 6.+
 #repository_root: ! '{default.repository.root}/jeus'
 repository_root: ! 'http://yiiok.ddns.net:8080/openpaas/jeus'
