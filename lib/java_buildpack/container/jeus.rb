@@ -28,21 +28,20 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
         download_tar
-
+#        copy_application          # jboss debug
+#        create_dodeploy           # jboss debug
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
-        @droplet.java_opts.add_system_property 'http.port', '$PORT'
+#        @droplet.java_opts.add_system_property 'http.port', '$PORT'       # need delete
 
         [
           @droplet.java_home.as_env_var,
           @droplet.java_opts.as_env_var,
-          "$PWD/#{(@droplet.sandbox + 'bin/startDomainAdminServer').relative_path_from(@droplet.root)}",
-          '-u',
-          'administrator',
-          '-p',
-          'jeus'
+          "$PWD/#{(@droplet.sandbox + 'bin/jeus').relative_path_from(@droplet.root)}",
+          '-Uadministrator',
+          '-P1111111',
         ].compact.join(' ')
       end
 
