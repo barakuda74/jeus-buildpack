@@ -73,7 +73,7 @@ describe JavaBuildpack::Container::JEUS do
 
     component.compile
 
-    root_webapp = app_dir + '.java-buildpack/jboss/standalone/deployments/ROOT.war'     #jboss debug
+    root_webapp = app_dir + '.java-buildpack/jeus/webhome/autodeploy/ROOT.war'     #jboss debug
 
     web_inf = root_webapp + 'WEB-INF'
     expect(web_inf).to exist

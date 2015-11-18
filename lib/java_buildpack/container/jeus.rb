@@ -58,7 +58,7 @@ module JavaBuildpack
         @application.root.children.each { |child| FileUtils.cp_r child, root }
       end
 
-      def create_dodeploy
+      def create_dodeploy #debug jboss
         FileUtils.touch(webapps + 'ROOT.war.dodeploy')
       end
 
