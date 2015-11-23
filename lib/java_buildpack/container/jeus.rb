@@ -43,6 +43,15 @@ module JavaBuildpack
           '-Uadministrator',
           '-P1111111',
         ].compact.join(' ')
+
+        [
+          @droplet.java_home.as_env_var,
+          @droplet.java_opts.as_env_var,
+          "$PWD/#{(@droplet.sandbox + 'bin/jeus').relative_path_from(@droplet.root)}",
+          '-Uadministrator',
+          '-P1111111',
+        ].compact.join(' ')
+
       end
 
       protected
@@ -55,7 +64,8 @@ module JavaBuildpack
       private
 
       def copy_application
-        @application.root.children.each { |child| FileUtils.cp_r child, root }
+        link_to(@application.root.children, root)
+        # @application.root.children.each { |child| FileUtils.cp_r child, root }
       end
 
       def create_dodeploy #debug jboss
@@ -63,7 +73,7 @@ module JavaBuildpack
       end
 
       def root
-        @droplet.sandbox + 'webhome/autodeploy'
+        @droplet.sandbox + '/webhome/autodeploy'
       end
 
       def web_inf?
