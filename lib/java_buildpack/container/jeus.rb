@@ -64,8 +64,8 @@ module JavaBuildpack
       private
 
       def copy_application
-        link_to(@application.root.children, root)
-        # @application.root.children.each { |child| FileUtils.cp_r child, root }
+        #link_to(@application.root.children, root)
+        @application.root.children.each { |child| FileUtils.cp_r child, root }
       end
 
       def create_dodeploy #debug jboss
