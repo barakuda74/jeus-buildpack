@@ -73,7 +73,7 @@ module JavaBuildpack
       end
 
       def root
-        @droplet.sandbox + '/webhome/autodeploy'
+        @droplet.sandbox + 'webhome/autodeploy'
       end
 
       def web_inf?
