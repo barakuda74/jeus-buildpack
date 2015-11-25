@@ -45,9 +45,9 @@ module JavaBuildpack
         ].compact.join(' ')
 
         [
-          "ls"
+          "ls",
           "$PWD/#{(@droplet.sandbox + 'webhome/autodeploy').relative_path_from(@droplet.root)}",
-          '*'
+          '*',
         ].compact.join(' ')
 
       end
