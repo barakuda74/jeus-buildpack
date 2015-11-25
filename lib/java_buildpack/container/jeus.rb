@@ -44,12 +44,6 @@ module JavaBuildpack
           '-P1111111',
         ].compact.join(' ')
 
-        [
-          "ls",
-          "$PWD/#{(@droplet.sandbox + 'webhome/autodeploy').relative_path_from(@droplet.root)}",
-          '*',
-        ].compact.join(' ')
-
       end
 
       protected
@@ -63,6 +57,7 @@ module JavaBuildpack
 
       def copy_application
         #link_to(@application.root.children, root)
+        FileUtils.mkdir_p root
         @application.root.children.each { |child| FileUtils.cp_r child, root }
       end
 
@@ -71,7 +66,7 @@ module JavaBuildpack
       end
 
       def root
-        @droplet.sandbox + 'webhome/autodeploy'
+        @droplet.sandbox + 'webhome/autodeploy/test'
       end
 
       def web_inf?
