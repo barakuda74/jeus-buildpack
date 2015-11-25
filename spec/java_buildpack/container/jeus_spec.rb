@@ -73,7 +73,7 @@ describe JavaBuildpack::Container::JEUS do
 
     component.compile
 
-    root_webapp = app_dir + '.java-buildpack/jeus/webhome/autodeploy/ROOT.war'     #jboss debug
+    root_webapp = app_dir + '.java-buildpack/jeus/webhome/autodeploy/test.war'     #jboss debug
 
     web_inf = root_webapp + 'WEB-INF'
     expect(web_inf).to exist
@@ -85,7 +85,7 @@ describe JavaBuildpack::Container::JEUS do
      app_fixture: 'container_tomcat' do
 
     expect(component.release).to eq("#{java_home.as_env_var} JAVA_OPTS=\"test-opt-2 test-opt-1 -Dhttp.port=$PORT\" " \
-                                        '$PWD/.java-buildpack/jeus/bin/startDomainAdminServer -u administrator -p jeus')
+                                        '$PWD/.java-buildpack/jeus/bin/jeus -Uadministrator -P1111111')
   end
 
 end

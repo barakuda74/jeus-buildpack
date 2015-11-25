@@ -45,11 +45,9 @@ module JavaBuildpack
         ].compact.join(' ')
 
         [
-          @droplet.java_home.as_env_var,
-          @droplet.java_opts.as_env_var,
-          "$PWD/#{(@droplet.sandbox + 'bin/jeus').relative_path_from(@droplet.root)}",
-          '-Uadministrator',
-          '-P1111111',
+          "ls"
+          "$PWD/#{(@droplet.sandbox + 'webhome/autodeploy').relative_path_from(@droplet.root)}",
+          '*'
         ].compact.join(' ')
 
       end

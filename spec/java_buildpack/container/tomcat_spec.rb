@@ -82,7 +82,8 @@ describe JavaBuildpack::Container::Tomcat do
     component.sub_components context
   end
 
-  it 'returns command' do
+  it '
+     ' do
     expect(component.command).to eq("test-var-2 test-var-1 #{java_home.as_env_var} JAVA_OPTS=\"test-opt-2 " \
                                       'test-opt-1 -Dhttp.port=$PORT" $PWD/.java-buildpack/tomcat/bin/catalina.sh run')
   end
